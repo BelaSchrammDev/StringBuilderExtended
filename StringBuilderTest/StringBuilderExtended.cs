@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace StringBuilderTest
 {
@@ -12,7 +8,6 @@ namespace StringBuilderTest
         public StringBuilderExtended(int size) { sb = new StringBuilder(size); }
         public StringBuilder GetSB() { return sb; }
         public override string ToString() { return sb.ToString(); }
-        public void Append(string text) { sb.Append(text); }
         public void Trim()
         {
             int wsFromBegin = 0;
@@ -39,11 +34,18 @@ namespace StringBuilderTest
             targetSB.Clear();
             if (startindex > sb.Length) return;
             int endindex;
-            if (lenght > 0) endindex = startindex + lenght - 1;
+            if (lenght > 0) endindex = startindex + lenght;
             else endindex = sb.Length - 1;
             for (int i = startindex; i <= endindex; i++) targetSB.Append(sb[i]);
         }
-        public void SetText(string text) { sb.Clear(); sb.Append(text); }
+        public bool IsEmpty() { return sb.Length == 0; }
+        public void Append(string text) { sb.Append(text); }
+        public void Append(char c) { sb.Append(c); }
+        public void AppendLF(string text) { Append(text + "\n"); }
+        public void AppendLFifNotEmpty(string text) { if (text.Length > 0) AppendLF(text); }
+        public void Clear() { sb.Clear(); }
+        public void SetText(string text) { Clear(); Append(text); }
+        public void SetText(char c) { Clear(); Append(c); }
         public void ToLower() { for (int i = 0; i < sb.Length; i++) sb[i] = char.ToLower(sb[i]); }
         public bool Contains(string s) { return IndexOf(s) != -1; }
         public int IndexOf(string s)
