@@ -34,7 +34,7 @@ namespace StringBuilderTest
             targetSB.Clear();
             if (startindex > sb.Length) return;
             int endindex;
-            if (lenght > 0) endindex = startindex + lenght;
+            if (lenght > 0) endindex = startindex + lenght - 1;
             else endindex = sb.Length - 1;
             for (int i = startindex; i <= endindex; i++) targetSB.Append(sb[i]);
         }
@@ -53,7 +53,7 @@ namespace StringBuilderTest
             int sIndex = 0;
             int contains = 0;
             int findIndex = -1;
-            for (int i = 0; sIndex < s.Length && i < sb.Length && i + (s.Length - sIndex) < sb.Length; i++, sIndex += contains)
+            for (int i = 0; sIndex < s.Length && i < sb.Length; i++, sIndex += contains)
             {
                 if (sb[i] == s[sIndex])
                 {
